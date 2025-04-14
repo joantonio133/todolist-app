@@ -53,7 +53,7 @@
                   
                     <div class="modal-footer">
                         <a href="{{ route('todos.index') }}" class="btn btn-secondary" style="margin-right: 10px;">Close</a>
-                        <button type="submit" class="btn btn-primary">Done</button>
+                        <button type="submit" class="btn btn-primary">Update</button>
                     </div>
                 </form>
             </div>
