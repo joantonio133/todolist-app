@@ -46,8 +46,18 @@
 
                 @foreach ( $todos as $todo )
 
-                <div class="task-card border d-flex justify-content-start align-items-center task-item">
-                    <input type="checkbox" class="form-check-input checklist">
+                <div class="task-card border d-flex justify-content-start align-items-center task-item"
+                @if($todo->completed) style="background-color: #f1f1f1; text-decoration: line-through; color: gray;" @endif>
+                <form action="{{ route('todos.toggleCompleted', $todo->id) }}" method="POST" class="d-inline me-2">
+                        @csrf
+                        @method('PATCH')
+                        <input 
+                            type="checkbox" 
+                            class="form-check-input checklist"
+                            onchange="this.form.submit()" 
+                            {{ $todo->completed ? 'checked' : '' }}
+                        >
+                    </form>
                     <div class="ms-4">
                         <strong>{{ $todo->title }}</strong>
                         <p>{{ $todo->description }}</p>
@@ -67,22 +77,6 @@
             </div>
         </div>
     </div>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            const checkboxes = document.querySelectorAll('.checklist');
-            checkboxes.forEach((checkbox) => {
-                checkbox.addEventListener('change', function () {
-                    const card = checkbox.closest('.task-item');
-                    if (checkbox.checked) {
-                        card.style.backgroundColor = '#e0e0e0';
-                    } else {
-                        card.style.backgroundColor = 'white';
-                    }
-                });
-            });
-        });
-    </script>   
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 

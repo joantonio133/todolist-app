@@ -17,6 +17,7 @@ return new class extends Migration
             $table->text('description')->nullable();
             $table->dateTime('date');
             $table->enum('priority', ['low', 'moderate', 'extreme'])->default('moderate'); // Priority level
+            $table->boolean('completed')->default(false); // Pastikan boolean
             $table->timestamps();
         });
     }

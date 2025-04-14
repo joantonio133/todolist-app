@@ -9,3 +9,5 @@ Route::get('/', function () {
 
 // Resource Controller untuk CRUD To-Do
 Route::resource('todos', TodoController::class);
+// untuk checklist
+Route::patch('/todos/{id}/toggle-completed', [TodoController::class, 'toggleCompleted'])->name('todos.toggleCompleted');

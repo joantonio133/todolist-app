@@ -16,7 +16,7 @@ class TodoController extends Controller
 
     public function index()
 {
-    $todos = Todo::all(); // atau Todo::where(...)->get()
+    $todos = Todo::orderBy('created_at', 'desc')->get();
     return view('todos.index', compact('todos'));
     
 }
@@ -41,7 +41,14 @@ class TodoController extends Controller
         return redirect()->route('todos.index')->with('success', 'To-Do created!');
     }
     
-    
+    public function toggleCompleted($id)
+{
+    $todo = Todo::findOrFail($id);
+    $todo->completed = !$todo->completed;
+    $todo->save();
+
+    return redirect()->route('todos.index')->with('success', 'Task status updated!');
+}
 
     public function edit($id)
     {
